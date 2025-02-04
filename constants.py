@@ -67,7 +67,7 @@ HATEFUL_MAPPING = {
 }
 INSULT_MAPPING = {
     "NIL": "FALSE", 
-    "insult": "level_1_insult"
+    "insult": "insult"
 }
 SEXUAL_MAPPING = {
     "NIL": "FALSE",
@@ -76,7 +76,7 @@ SEXUAL_MAPPING = {
 }
 PHYSICAL_VIOLENCE_MAPPING = {
     "NIL": "FALSE",
-    "physical violence": "level_1_physical_violence"
+    "physical violence": "physical_violence"
 }
 SELF_HARM_MAPPING = {
     "NIL": "FALSE",
