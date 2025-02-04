@@ -16,7 +16,15 @@ from gspread.exceptions import WorksheetNotFound
 from google.oauth2 import service_account
 
 # Local imports
-from constants import definitions
+from constants import (
+    DEFINITIONS,
+    HATEFUL_MAPPING,
+    INSULT_MAPPING,
+    SEXUAL_MAPPING,
+    PHYSICAL_VIOLENCE_MAPPING,
+    SELF_HARM_MAPPING,
+    MISCONDUCT_MAPPING,
+)
 
 # =============================================================================
 # CONSTANTS
@@ -173,7 +181,7 @@ if not labeller:
 
 # 2. Collapsible box for definitions (placeholder text)
 with st.expander("Definitions"):
-    st.info(definitions)
+    st.info(DEFINITIONS)
 
 st.divider()
 
@@ -208,28 +216,28 @@ if st.session_state.index < len(df):
 
     with col1:
         # --- Hateful ---
-        hateful_options = ["discriminatory", "hate speech", "NIL"]
+        hateful_options = list(HATEFUL_MAPPING.keys())
         hateful_label = st.pills("**1. Hateful**", hateful_options, selection_mode="single", key=f"hateful_{st.session_state.index}")
 
         # --- Insults ---
-        insult_options = ["insult", "NIL"]
+        insult_options = list(INSULT_MAPPING.keys())
         insult_label = st.pills("**2. Insults**", insult_options, selection_mode="single", key=f"insult_{st.session_state.index}")
 
         # --- Sexual ---
-        sexual_options = ["not appropriate for minors", "not appropriate for all ages", "NIL"]
+        sexual_options = list(SEXUAL_MAPPING.keys())
         sexual_label = st.pills("**3. Sexual**", sexual_options, selection_mode="single", key=f"sexual_{st.session_state.index}")
 
     with col2:
         # --- Physical violence ---
-        physical_violence_options = ["physical violence", "NIL"]
+        physical_violence_options = list(PHYSICAL_VIOLENCE_MAPPING.keys())
         physical_violence_label = st.pills("**4. Physical Violence**", physical_violence_options, selection_mode="single", key=f"physical_violence_{st.session_state.index}")
 
         # --- Self-harm ---
-        self_harm_options = ["ideation/intent", "actual self-harm/sucide", "NIL"]
+        self_harm_options = list(SELF_HARM_MAPPING.keys())
         self_harm_label = st.pills("**5. Self-harm**", self_harm_options, selection_mode="single", key=f"self_harm_{st.session_state.index}")
 
         # --- All other misconduct ---
-        misconduct_options = ["generally not socially accepted", "illegal", "NIL"]
+        misconduct_options = list(MISCONDUCT_MAPPING.keys())
         misconduct_label = st.pills("**6. All Other Misconduct**", misconduct_options, selection_mode="single", key=f"misconduct_{st.session_state.index}")
 
     # =============================================================================
@@ -242,31 +250,7 @@ if st.session_state.index < len(df):
         elif not all([hateful_label, insult_label, sexual_label, physical_violence_label, self_harm_label, misconduct_label]):
             st.error("Please provide labels for all categories before submitting.")
         else:
-
-
-
-            # map the human readable labels to the standardised labels
-            for label in [hateful_label, insult_label, sexual_label, physical_violence_label, self_harm_label, misconduct_label]:
-                if label == "NIL":
-                    label = "FALSE"
-                elif label == "discriminatory":
-                    label = "level_1_discriminatory"
-                elif label == "hate speech":
-                    label = "level_2_hate_speech"
-                elif label == "not appropriate for minors":
-                    label = "level_1_not_appropriate_for_minors"
-                elif label == "not appropriate for all ages":
-                    label = "level_2_not_appropriate_for_all_ages"
-                elif label == "ideation/intent":
-                    label = "level_1_self_harm_intent"
-                elif label == "actual self-harm/sucide":
-                    label = "level_2_self_harm_action"
-                elif label == "generally not socially accepted":
-                    label = "level_1_not_socially_accepted"
-                elif label == "illegal":
-                    label = "level_2_illegal_activities"
-
-            # Prepare a dictionary of all data to be saved.
+            # Map all labels using the mapping dictionaries
             row = {
                 "timestamp": datetime.now().isoformat(),
                 "labeller": labeller,
@@ -274,14 +258,13 @@ if st.session_state.index < len(df):
                 "attempt_id": st.session_state.index,
                 "original_id": record["original_id"],
                 "text": record["text"],
-                "hateful": hateful_label,
-                "insults": insult_label,
-                "sexual": sexual_label,
-                "physical_violence": physical_violence_label,
-                "self_harm": self_harm_label,
-                "all_other_misconduct": misconduct_label,
+                "hateful": HATEFUL_MAPPING[hateful_label],
+                "insults": INSULT_MAPPING[insult_label],
+                "sexual": SEXUAL_MAPPING[sexual_label],
+                "physical_violence": PHYSICAL_VIOLENCE_MAPPING[physical_violence_label],
+                "self_harm": SELF_HARM_MAPPING[self_harm_label],
+                "all_other_misconduct": MISCONDUCT_MAPPING[misconduct_label],
             }
-
             # Save the data to Google Sheets
             save_labelled_data(row)
 

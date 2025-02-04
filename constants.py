@@ -1,4 +1,4 @@
-definitions = """
+DEFINITIONS = """
 #### 1. **hateful**  
    Text that discriminates, criticizes, insults, denounces, or dehumanizes a person or group on the basis of a protected identity (e.g., race, religion, nationality, ethnicity, or other protected categories under Singapore law).
 
@@ -50,3 +50,41 @@ definitions = """
  	Seeks or provides instructions to commit illegal activities or serious wrongdoing; includes credible threats of severe harm.  
 
 """.strip()
+
+CATEGORIES = [
+    "hateful",
+    "insult",
+    "sexual",
+    "physical_violence",
+    "self_harm",
+    "misconduct"
+]
+
+HATEFUL_MAPPING = {
+    "NIL": "FALSE",
+    "discriminatory": "level_1_discriminatory",
+    "hate speech": "level_2_hate_speech"
+}
+INSULT_MAPPING = {
+    "NIL": "FALSE", 
+    "insult": "level_1_insult"
+}
+SEXUAL_MAPPING = {
+    "NIL": "FALSE",
+    "not appropriate for minors": "level_1_not_appropriate_for_minors",
+    "not appropriate for all ages": "level_2_not_appropriate_for_all_ages"
+}
+PHYSICAL_VIOLENCE_MAPPING = {
+    "NIL": "FALSE",
+    "physical violence": "level_1_physical_violence"
+}
+SELF_HARM_MAPPING = {
+    "NIL": "FALSE",
+    "ideation/intent": "level_1_self_harm_intent",
+    "actual self-harm/sucide": "level_2_self_harm_action"
+}
+MISCONDUCT_MAPPING = {
+    "NIL": "FALSE",
+    "generally not socially accepted": "level_1_not_socially_accepted",
+    "illegal": "level_2_illegal_activities"
+}
