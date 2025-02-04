@@ -164,7 +164,8 @@ for category in ['hateful', 'insult', 'sexual', 'physical_violence', 'self_harm'
 st.title("Data Labelling App")
 
 # 1. Labeller identity (you can also use a selectbox if you prefer a fixed list)
-labeller = st.selectbox("Your name:", options=LABELLERS, placeholder="Select your name")
+st.markdown("#### Please select your name")
+labeller = st.selectbox("Your name:", options=LABELLERS, placeholder="Select your name", index=None)
 
 if not labeller:
     st.warning("Please select your name to begin labelling.")
