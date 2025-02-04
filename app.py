@@ -207,28 +207,28 @@ if st.session_state.index < len(df):
 
     with col1:
         # --- Hateful ---
-        hateful_options = ["discriminatory", "hate speech", "not hateful"]
+        hateful_options = ["discriminatory", "hate speech", "NIL"]
         hateful_label = st.pills("**1. Hateful**", hateful_options, selection_mode="single", key=f"hateful_{st.session_state.index}")
 
         # --- Insults ---
-        insult_options = ["insult", "not insulting"]
+        insult_options = ["insult", "NIL"]
         insult_label = st.pills("**2. Insults**", insult_options, selection_mode="single", key=f"insult_{st.session_state.index}")
 
         # --- Sexual ---
-        sexual_options = ["not appropriate for minors", "not appropriate for all ages", "not sexual"]
+        sexual_options = ["not appropriate for minors", "not appropriate for all ages", "NIL"]
         sexual_label = st.pills("**3. Sexual**", sexual_options, selection_mode="single", key=f"sexual_{st.session_state.index}")
 
     with col2:
         # --- Physical violence ---
-        physical_violence_options = ["physical violence", "no physical violence"]
+        physical_violence_options = ["physical violence", "NIL"]
         physical_violence_label = st.pills("**4. Physical Violence**", physical_violence_options, selection_mode="single", key=f"physical_violence_{st.session_state.index}")
 
         # --- Self-harm ---
-        self_harm_options = ["ideation/intent", "actual self-harm/sucide", "no self-harm"]
+        self_harm_options = ["ideation/intent", "actual self-harm/sucide", "NIL"]
         self_harm_label = st.pills("**5. Self-harm**", self_harm_options, selection_mode="single", key=f"self_harm_{st.session_state.index}")
 
         # --- All other misconduct ---
-        misconduct_options = ["generally not socially accepted", "illegal", "no misconduct"]
+        misconduct_options = ["generally not socially accepted", "illegal", "NIL"]
         misconduct_label = st.pills("**6. All Other Misconduct**", misconduct_options, selection_mode="single", key=f"misconduct_{st.session_state.index}")
 
     # =============================================================================
@@ -246,7 +246,7 @@ if st.session_state.index < len(df):
 
             # map the human readable labels to the standardised labels
             for label in [hateful_label, insult_label, sexual_label, physical_violence_label, self_harm_label, misconduct_label]:
-                if label and "not" in label:
+                if label == "NIL":
                     label = "FALSE"
                 elif label == "discriminatory":
                     label = "level_1_discriminatory"
@@ -264,7 +264,7 @@ if st.session_state.index < len(df):
                     label = "level_1_not_socially_accepted"
                 elif label == "illegal":
                     label = "level_2_illegal_activities"
-                    
+
             # Prepare a dictionary of all data to be saved.
             row = {
                 "timestamp": datetime.now().isoformat(),
