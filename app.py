@@ -224,7 +224,7 @@ if st.session_state.index < len(df):
         physical_violence_label = st.pills("**4. Physical Violence**", physical_violence_options, selection_mode="single", key=f"physical_violence_{st.session_state.index}")
 
         # --- Self-harm ---
-        self_harm_options = ["ideation", "actual self-harm/sucide", "no self-harm"]
+        self_harm_options = ["ideation/intent", "actual self-harm/sucide", "no self-harm"]
         self_harm_label = st.pills("**5. Self-harm**", self_harm_options, selection_mode="single", key=f"self_harm_{st.session_state.index}")
 
         # --- All other misconduct ---
@@ -241,6 +241,30 @@ if st.session_state.index < len(df):
         elif not all([hateful_label, insult_label, sexual_label, physical_violence_label, self_harm_label, misconduct_label]):
             st.error("Please provide labels for all categories before submitting.")
         else:
+
+
+
+            # map the human readable labels to the standardised labels
+            for label in [hateful_label, insult_label, sexual_label, physical_violence_label, self_harm_label, misconduct_label]:
+                if label and "not" in label:
+                    label = "FALSE"
+                elif label == "discriminatory":
+                    label = "level_1_discriminatory"
+                elif label == "hate speech":
+                    label = "level_2_hate_speech"
+                elif label == "not appropriate for minors":
+                    label = "level_1_not_appropriate_for_minors"
+                elif label == "not appropriate for all ages":
+                    label = "level_2_not_appropriate_for_all_ages"
+                elif label == "ideation/intent":
+                    label = "level_1_self_harm_intent"
+                elif label == "actual self-harm/sucide":
+                    label = "level_2_self_harm_action"
+                elif label == "generally not socially accepted":
+                    label = "level_1_not_socially_accepted"
+                elif label == "illegal":
+                    label = "level_2_illegal_activities"
+                    
             # Prepare a dictionary of all data to be saved.
             row = {
                 "timestamp": datetime.now().isoformat(),
