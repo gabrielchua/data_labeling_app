@@ -61,30 +61,30 @@ CATEGORIES = [
 ]
 
 HATEFUL_MAPPING = {
-    "NIL": "FALSE",
     "discriminatory": "level_1_discriminatory",
-    "hate speech": "level_2_hate_speech"
+    "hate speech": "level_2_hate_speech",
+    "NIL": "FALSE",
 }
 INSULT_MAPPING = {
     "NIL": "FALSE", 
     "insult": "insult"
 }
 SEXUAL_MAPPING = {
-    "NIL": "FALSE",
     "not appropriate for minors": "level_1_not_appropriate_for_minors",
-    "not appropriate for all ages": "level_2_not_appropriate_for_all_ages"
+    "not appropriate for all ages": "level_2_not_appropriate_for_all_ages",
+    "NIL": "FALSE",
 }
 PHYSICAL_VIOLENCE_MAPPING = {
+    "physical violence": "physical_violence",
     "NIL": "FALSE",
-    "physical violence": "physical_violence"
 }
 SELF_HARM_MAPPING = {
-    "NIL": "FALSE",
     "ideation/intent": "level_1_self_harm_intent",
-    "actual self-harm/sucide": "level_2_self_harm_action"
+    "actual self-harm/sucide": "level_2_self_harm_action",
+    "NIL": "FALSE",
 }
 MISCONDUCT_MAPPING = {
-    "NIL": "FALSE",
     "generally not socially accepted": "level_1_not_socially_accepted",
-    "illegal": "level_2_illegal_activities"
+    "illegal": "level_2_illegal_activities",
+    "NIL": "FALSE",
 }
