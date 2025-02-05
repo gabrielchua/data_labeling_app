@@ -66,8 +66,8 @@ HATEFUL_MAPPING = {
     "NIL": "FALSE",
 }
 INSULT_MAPPING = {
+    "insult": "insult",
     "NIL": "FALSE", 
-    "insult": "insult"
 }
 SEXUAL_MAPPING = {
     "not appropriate for minors": "level_1_not_appropriate_for_minors",
