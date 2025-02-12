@@ -206,6 +206,7 @@ if 'index' not in st.session_state or st.session_state.get('current_labeller') !
 # DISPLAY CURRENT RECORD & LABELLING WIDGETS
 # =============================================================================
 
+print(st.session_state.index)
 if st.session_state.index < len(df):
     record = df.iloc[st.session_state.index]
     st.info(f"Example {(st.session_state.index+1)}/50")
