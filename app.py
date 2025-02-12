@@ -42,7 +42,7 @@ LABELLERS = [
 GOOGLE_SHEET_URL = st.secrets["GOOGLE_SHEET_URL"]
 GOOGLE_CREDENTIALS = st.secrets["GCP_SERVICE_ACCOUNT"]
 
-INPUT_SHEET_NAME = "sampled_30"
+INPUT_SHEET_NAME = "sampled_50"
 OUTPUT_SHEET_NAME = "sample_30_labelled"
 
 # =============================================================================
