@@ -208,6 +208,7 @@ if 'index' not in st.session_state or st.session_state.get('current_labeller') !
 
 if st.session_state.index < len(df):
     record = df.iloc[st.session_state.index]
+    st.info(f"Example {st.session_state.index+1}/50}
     st.success(f"#### {record['text']}")
 
     st.markdown("#### Please label the above text. Choose only 1 option per category.")
